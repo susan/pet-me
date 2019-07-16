@@ -2,22 +2,60 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.container {
+   display: grid;
+   max-width: 900px;
+   margin: auto;
+   grid-template-areas: "retrieve-Form retrieve-Form"
+                        "pet pet";
+   grid-template-columns: 200px minmax(100px, 200px);
+   grid-gap: 15px 25px;
+   font-size: 14px;
+   color: dodgerblue;
+ }
+
+ .pet {
+   grid-area: pet;
+   color: green;
+   border-radius: 10px;
+   background-color: lightcyan;
+   box-shadow: 0 1px 1px 0 rgba(0, 0, 0);
+ }
+
+ .retrieve-Form {
+   grid-area: retrieve-Form;
+ }
+
+ .retrieve-Form label {
+   display: block;
+   text-align: left;
+   width: 70px;
+  }
+
+  .retrieve-Form input,
+  .retrieve-Form  select {
+    font-size: 12px;
+    margin-bottom: 30px;
+    width: 200px;
+    height: 20px;
+
+  }
+
+.retrieve-Form button{
+  display: block;
+  font-size: 12px;
+  background-color: dodgerblue ;
+    padding: 5px 25px;
+    color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+.image-container {
+    clip-path: circle(50% at 50% 50%);
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin: 0px 20px 0px 10px;
+  }
 
 .App-link {
   color: #61dafb;
