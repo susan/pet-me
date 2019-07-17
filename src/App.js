@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Pet } from './Pet';
-import { PetData } from './PetData';
+import { PetList } from './PetList';
+//import { PetData } from './PetData';
 import RetrievePetsForm from'./RetrievePetsForm';
 
 const TOKEN = `${process.env.REACT_APP_API_TOKEN}`
 
 export default class App extends Component {
+
+state= {
+  Animals: [],
+  Loaded: false,
+}
+
+   componentDidMount() {
+     const url = "https://api.petfinder.com/v2/animals?type=dog&page=2";
+     const proxyurl = "https://cors-anywhere.herokuapp.com/";
+     fetch(proxyurl + url, {
+       headers: {
+        "Authorization": `Bearer ${TOKEN}`
+       }
+     })
+    .then(r=> r.json())
+    .then(data=>{
+      this.setState({
+        Animals: data.animals,
+        Loaded: true,
+      })
+    })
+   }
 
    petCriteriaSubmitHandler = (event, petCriteria) => {
     event.preventDefault()
@@ -18,14 +40,20 @@ export default class App extends Component {
       }
     })
    .then(r=> r.json())
-   .then(r=> console.log(r))
+   .then(userPetCriteria=> this.setState({Animals: userPetCriteria.animals}))
    }
+
   render() {
     return (
       <div className="App">
         <div className="container">
           <RetrievePetsForm petCriteriaSubmitHandler={this.petCriteriaSubmitHandler} /  >
-          <Pet petData={PetData} />
+          {!this.state.Animals
+            ?
+            (<div> Loading Pet Choices ...</div>)
+            :
+            (<PetList Animals={this.state.Animals} />)
+           }
         </div>
       </div>
     );

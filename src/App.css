@@ -1,3 +1,8 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -5,11 +10,12 @@
 .container {
    display: grid;
    max-width: 900px;
+   position: relative;
    margin: auto;
    grid-template-areas: "retrieve-Form retrieve-Form"
                         "pet pet";
-   grid-template-columns: 200px minmax(100px, 200px);
-   grid-gap: 15px 25px;
+   grid-template-columns: repeat(autofill, minmax(100px, 1fr));
+   grid-gap: 20px 5px;
    font-size: 14px;
    color: dodgerblue;
  }
@@ -19,9 +25,13 @@
    color: green;
    border-radius: 10px;
    background-color: lightcyan;
+   text-align: center;
    box-shadow: 0 1px 1px 0 rgba(0, 0, 0);
  }
 
+.pet h4{
+  text-align: center;
+}
  .retrieve-Form {
    grid-area: retrieve-Form;
  }
@@ -30,6 +40,9 @@
    display: block;
    text-align: left;
    width: 70px;
+  }
+  .retrieve-Form h2 {
+    text-align: left;
   }
 
   .retrieve-Form input,
@@ -51,10 +64,10 @@
 
 .image-container {
     clip-path: circle(50% at 50% 50%);
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     float: left;
-    margin: 0px 20px 0px 10px;
+    margin: 20px 20px 0px 10px;
   }
 
 .App-link {
