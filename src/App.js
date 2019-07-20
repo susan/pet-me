@@ -6,7 +6,7 @@ import  { RetrievePetsForm } from'./RetrievePetsForm';
 
 const TOKEN = `${process.env.REACT_APP_API_TOKEN}`
 
-export const App = () => {
+export const App = (props) => {
 
 const [Animals, setAnimals] = useState([]);
 const [Loaded, setLoaded] =useState(false)
@@ -46,22 +46,23 @@ const [Loaded, setLoaded] =useState(false)
    const petCriteriaSubmitHandler = (event, Location, AnimalType) => {
      event.preventDefault()
      console.log("is this clicked?")
-   //  const url =`https://api.petfinder.com/v2/animals?type=${AnimalType}&page=2&location=${Location}`
-   //  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-   //  fetch(proxyurl + url, {
-   //    headers: {
-   //      "Authorization": `Bearer ${TOKEN}`
-   //    }
-   //  })
-   // .then(r=> r.json())
-   // .then(userPetCriteria=> this.setState({Animals: userPetCriteria.animals}))
-    }
+      const url =`https://api.petfinder.com/v2/animals?type=${AnimalType}&page=2&location=${Location}`
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      fetch(proxyurl + url, {
+        headers: {
+         "Authorization": `Bearer ${TOKEN}`
+       }
+      })
+      .then(r=> r.json())
+      .then(userPetCriteria=> setAnimals(userPetCriteria.animals)
+      )
+   }
 
 
     return (
       <div className="App">
         <div className="container">
-          <RetrievePetsForm petCriteriaSubmitHandler={petCriteriaSubmitHandler} /  >
+          <RetrievePetsForm petCriteriaSubmitHandler={petCriteriaSubmitHandler}  />
           {!Animals
             ?
             (<div> Loading Pet Choices ...</div>)

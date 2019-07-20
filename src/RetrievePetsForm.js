@@ -12,8 +12,6 @@ export const RetrievePetsForm = (props) => {
    const handleSubmit = (event) => {
    	console.log("is this working")
    	event.preventDefault()
-   	console.log(Location)
-   	console.log(AnimalType)
    	props.petCriteriaSubmitHandler(event, Location, AnimalType)
    }
 
@@ -39,7 +37,7 @@ export const RetrievePetsForm = (props) => {
          <select name="AnimalType"
             value={AnimalType}
             onChange={ (event) => updateAnimalType(event.target.value) }
-            onBlur= { (event) => updateLocation(event.target.value) }
+            onBlur= { (event) => updateAnimalType(event.target.value) }
           >
            <option value="Cat"> Cat</option>
            <option value="Dog"> Dog</option>
