@@ -13,7 +13,7 @@ const [Loaded, setLoaded] =useState(false)
 
 
     useEffect ( () => {
-      const url = "https://api.petfinder.com/v2/animals?type=dog&page=2";
+      const url = "https://api.petfinder.com/v2/animals?type=cat&page=2";
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
       fetch(proxyurl + url, {
          headers: {

@@ -8,8 +8,9 @@ export const PetList = (props) => {
     })
 
  	return (
- 		<div>
+ 		<>
  		{animalList}
- 		</div>
-   )
+ 		</>
+ 	)
+
 }

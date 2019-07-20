@@ -9,71 +9,75 @@
 
 .container {
    display: grid;
-   max-width: 900px;
-   position: relative;
-   margin: auto;
-   grid-template-areas: "retrieve-Form retrieve-Form"
-                        "pet pet";
-   grid-template-columns: repeat(autofill, minmax(100px, 1fr));
-   grid-gap: 20px 5px;
+   height: 600px;
+   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+   justify-content: center;
+   grid-gap: 20px 20px;
    font-size: 14px;
    color: dodgerblue;
  }
 
- .pet {
-   grid-area: pet;
-   color: green;
-   border-radius: 10px;
-   background-image: linear-gradient(to right top, #8b661f, #a37f41, #bb9961, #d2b483, #ead0a6);
-   text-align: center;
-   box-shadow: 0 1px 1px 0 rgba(0, 0, 0);
- }
-
+.pet {
+  grid-column: span 1;
+  color: green;
+  border-radius: 5px;
+  margin: 2px;
+  background: -webkit-linear-gradient(to right, #659999, #f4791f); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #659999, #f4791f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0);
+}
 .pet h4{
-  text-align: center;
+  text-align: left;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.2;
+  font-style: italic;
   letter-spacing: 0.1px;
   color: white;
+  padding: 2px;
+  /*width: 120px;*/
 
 }
  .retrieve-Form {
-   grid-area: retrieve-Form;
+   grid-column: 1/7;
+   text-align: center;
  }
 
  .retrieve-Form label {
-   display: block;
-   text-align: left;
-   width: 70px;
+  text-align: left;
+  padding: 10px;
+  width: 30px;
+
   }
   .retrieve-Form h2 {
-    text-align: left;
+    text-align: center;
   }
 
   .retrieve-Form input,
   .retrieve-Form  select {
-    font-size: 12px;
+    font-size: 14px;
+    padding: 2px;
     margin-bottom: 30px;
-    width: 200px;
+    width: 180px;
     height: 20px;
 
   }
 
+
 .retrieve-Form button{
-  display: block;
   font-size: 12px;
   background-color: dodgerblue ;
-    padding: 5px 25px;
-    color: white;
+  padding: 5px 25px;
+  color: white;
 }
 
 .image-container {
     clip-path: circle(50% at 50% 50%);
-    width: 100px;
-    height: 100px;
-    float: left;
+    width: 150px;
+    height: 150px;
+    float: center;
     margin: 20px 20px 0px 10px;
+
   }
 
 .App-link {
