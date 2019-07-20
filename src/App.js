@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { PetList } from './PetList';
 //import { PetData } from './PetData';
-import RetrievePetsForm from'./RetrievePetsForm';
+import  { RetrievePetsForm } from'./RetrievePetsForm';
 
 const TOKEN = `${process.env.REACT_APP_API_TOKEN}`
 
@@ -30,9 +30,9 @@ state= {
     })
    }
 
-   petCriteriaSubmitHandler = (event, petCriteria) => {
+   petCriteriaSubmitHandler = (event, Location, AnimalType) => {
     event.preventDefault()
-    const url =`https://api.petfinder.com/v2/animals?type=${petCriteria.animalType}&page=2&location=${petCriteria.location}`
+    const url =`https://api.petfinder.com/v2/animals?type=${AnimalType}&page=2&location=${Location}`
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch(proxyurl + url, {
       headers: {
