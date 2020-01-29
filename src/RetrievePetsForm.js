@@ -24,6 +24,7 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
             type="text"
             placeholder="Sioux City, Iowa"
             name="Location"
+            id="Location"
             value={Location}
             onChange={event => updateLocation(event.target.value)}
             onBlur={event => updateLocation(event.target.value)}
@@ -34,6 +35,7 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
           Animal
           <select
             name="AnimalType"
+            id="animaltype"
             value={AnimalType}
             onChange={event => updateAnimalType(event.target.value)}
             onBlur={event => updateAnimalType(event.target.value)}
