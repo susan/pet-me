@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
-  const [Location, updateLocation] = useState("");
-  const [AnimalType, updateAnimalType] = useState("");
+  const [location, updateLocation] = useState("");
+  const [animalType, updateAnimalType] = useState("");
 
   // const handleChange = (event) => {
   //
@@ -25,7 +25,7 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
             placeholder="Sioux City, Iowa"
             name="Location"
             id="Location"
-            value={Location}
+            value={location}
             onChange={event => updateLocation(event.target.value)}
             onBlur={event => updateLocation(event.target.value)}
           />
@@ -36,7 +36,7 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
           <select
             name="AnimalType"
             id="animaltype"
-            value={AnimalType}
+            value={animalType}
             onChange={event => updateAnimalType(event.target.value)}
             onBlur={event => updateAnimalType(event.target.value)}
           >
