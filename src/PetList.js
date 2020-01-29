@@ -1,16 +1,12 @@
-import React from 'react';
-import { Pet } from './Pet';
+import React from "react";
+import { Pet } from "./Pet";
 
-export const PetList = (props) => {
+export const PetList = ({ Animals }) => {
+  const animalList =
+    Animals &&
+    Animals.map(pet => {
+      return <Pet key={pet.id} pet={pet} />;
+    });
 
-  const animalList=	props.Animals.map(pet => {
-      return <Pet key={pet.id} pet={pet} />
-    })
-
- 	return (
- 		<>
- 		{animalList}
- 		</>
- 	)
-
-}
+  return <>{animalList}</>;
+};

@@ -3,6 +3,13 @@
 # api keys
 .env
 
+.cache/
+dist/
+
+.DS_Store
+coverage/
+.vscode/
+
 # dependencies
 /node_modules
 /.pnp
