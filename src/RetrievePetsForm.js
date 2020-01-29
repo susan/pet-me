@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 
 export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
+  const ANIMALS = ["cat", "dog", "bird", "horse", "somethingelse"];
   const [location, updateLocation] = useState("");
   const [animalType, updateAnimalType] = useState("");
-
-  // const handleChange = (event) => {
-  //
-  // }
 
   const handleSubmit = event => {
     console.log("is this working");
@@ -31,21 +28,23 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
           />
         </label>
 
-        <label htmlFor="animal-type">
+        {/* <label htmlFor="animal-type">
           Animal
           <select
             name="AnimalType"
-            id="animaltype"
+            id="animalType"
             value={animalType}
             onChange={event => updateAnimalType(event.target.value)}
             onBlur={event => updateAnimalType(event.target.value)}
           >
-            <option value="Cat"> Cat</option>
-            <option value="Dog"> Dog</option>
-            <option value="Bird"> Bird</option>
-            <option value="Horse"> Horse</option>
+            <option>All</option>
+            {ANIMALS.map((animal, i) => (
+              <option id={i} value={animal}>
+                {animal}
+              </option>
+            ))}
           </select>
-        </label>
+        </label> */}
         <button type="submit"> Submit </button>
       </form>
     </div>
