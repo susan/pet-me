@@ -13,7 +13,6 @@ export const Pet = ({ pet }) => {
       <h4> gender: {pet.gender} </h4>
       <h4> breed: {pet.breeds.primary} </h4>
       <h4>
-        {" "}
         city: {pet.contact.address.city}, {pet.contact.address.state}
       </h4>
     </div>

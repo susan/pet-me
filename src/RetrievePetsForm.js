@@ -38,7 +38,6 @@ export const RetrievePetsForm = ({
   }, [animalType]);
 
   const handleSubmit = e => {
-    console.log("is this working", selectedBreed);
     petCriteriaSubmitHandler(e, location, animalType, selectedBreed);
   };
 

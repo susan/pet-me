@@ -26,38 +26,24 @@ export const App = props => {
       });
   }, []);
 
-  // componentDidMount() {
-  //   const url = "https://api.petfinder.com/v2/animals?type=dog&page=2";
-  //   const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  //   fetch(proxyurl + url, {
-  //     headers: {
-  //      "Authorization": `Bearer ${TOKEN}`
-  //     }
-  //   })
-  //  .then(r=> r.json())
-  //  .then(data=>{
-  //    this.setState({
-  //      Animals: data.animals,
-  //      Loaded: true,
-  //    })
-  //  })
-  // }
-
-  const petCriteriaSubmitHandler = (e, location, animalType, selectedBreed) => {
+  const petCriteriaSubmitHandler = async (
+    e,
+    location,
+    animalType,
+    selectedBreed
+  ) => {
     e.preventDefault();
     setAnimals([]);
-    console.log("is clicked");
-    console.log(selectedBreed);
-    console.log(location);
     const url = `https://api.petfinder.com/v2/animals?type=${animalType}&location=${location}&breed=${selectedBreed}`;
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    fetch(proxyurl + url, {
+
+    const resp = await fetch(proxyurl + url, {
       headers: {
         Authorization: `Bearer ${TOKEN}`
       }
-    })
-      .then(r => r.json())
-      .then(userPetCriteria => setAnimals(userPetCriteria.animals));
+    });
+    const userPetCriteria = await resp.json();
+    setAnimals(userPetCriteria.animals);
   };
 
   return (
