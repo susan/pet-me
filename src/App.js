@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { PetList } from "./PetList";
-//import { PetData } from './PetData';
+
 import { RetrievePetsForm } from "./RetrievePetsForm";
 
 const TOKEN = `${process.env.REACT_APP_API_TOKEN}`;
 
 export const App = props => {
-  const [Animals, setAnimals] = useState([]);
+  const ANIMALS = ["dog", "cat", "horse"];
+  const [animals, setAnimals] = useState([]);
   const [Loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const url = "https://api.petfinder.com/v2/animals?type=cat&page=2";
+    const url =
+      "https://api.petfinder.com/v2/animals?type=cat&location=Sioux City, Iowa";
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch(proxyurl + url, {
       headers: {
@@ -41,10 +43,13 @@ export const App = props => {
   //  })
   // }
 
-  const petCriteriaSubmitHandler = (event, Location, AnimalType) => {
-    event.preventDefault();
-    console.log("is this clicked?");
-    const url = `https://api.petfinder.com/v2/animals?type=${AnimalType}&page=2&location=${Location}`;
+  const petCriteriaSubmitHandler = (e, location, animalType, selectedBreed) => {
+    e.preventDefault();
+    setAnimals([]);
+    console.log("is clicked");
+    console.log(selectedBreed);
+    console.log(location);
+    const url = `https://api.petfinder.com/v2/animals?type=${animalType}&location=${location}&breed=${selectedBreed}`;
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch(proxyurl + url, {
       headers: {
@@ -58,11 +63,15 @@ export const App = props => {
   return (
     <div className="App">
       <div className="container">
-        <RetrievePetsForm petCriteriaSubmitHandler={petCriteriaSubmitHandler} />
-        {!Animals ? (
+        <RetrievePetsForm
+          petCriteriaSubmitHandler={petCriteriaSubmitHandler}
+          ANIMALS={ANIMALS}
+          TOKEN={TOKEN}
+        />
+        {!animals ? (
           <div> Loading Pet Choices ...</div>
         ) : (
-          <PetList Animals={Animals} />
+          <PetList Animals={animals} />
         )}
       </div>
     </div>

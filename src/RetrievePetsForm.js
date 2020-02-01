@@ -1,19 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useDropdown from "./useDropdown";
 
-export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
-  const ANIMALS = ["dog", "cat", "horse"];
-  const [location, updateLocation] = useState("");
-  const [animalType, updateAnimalType] = useState("");
+export const RetrievePetsForm = ({
+  petCriteriaSubmitHandler,
+  ANIMALS,
+  TOKEN
+}) => {
   const [breeds, updateBreeds] = useState([]);
-  const [selectedBreed, updateSelectedBreed] = useState("");
-  // const handleChange = (event) => {
-  //
-  // }
+  const [animalType, AnimalDropdown] = useDropdown(
+    "animalType",
+    "cat",
+    ANIMALS
+  );
+  const [selectedBreed, BreedDropdown, updateSelectedBreed] = useDropdown(
+    "selectedBreed",
+    "",
+    breeds
+  );
 
-  const handleSubmit = event => {
-    console.log("is this working");
-    event.preventDefault();
-    petCriteriaSubmitHandler(event, Location, AnimalType);
+  const [location, updateLocation] = useState("Sioux City, Iowa");
+
+  useEffect(() => {
+    updateBreeds([]);
+    updateSelectedBreed("");
+    const url = `https://api.petfinder.com/v2/types/${animalType}/breeds`;
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    fetch(proxyurl + url, {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`
+      }
+    })
+      .then(r => r.json())
+      .then(({ breeds }) => {
+        const breedTypes = breeds.map(({ name }) => name);
+        updateBreeds(breedTypes);
+      }, console.error);
+  }, [animalType]);
+
+  const handleSubmit = e => {
+    console.log("is this working", selectedBreed);
+    petCriteriaSubmitHandler(e, location, animalType, selectedBreed);
   };
 
   return (
@@ -32,43 +58,8 @@ export const RetrievePetsForm = ({ petCriteriaSubmitHandler }) => {
             onBlur={e => updateLocation(e.target.value)}
           />
         </label>
-
-        <label htmlFor="animal-type">
-          Animal
-          <select
-            name="animalType"
-            id="animalType"
-            value={animalType}
-            onChange={e => updateAnimalType(e.target.value)}
-            onBlur={e => updateAnimalType(e.target.value)}
-          >
-            <option> All</option>
-            {ANIMALS.map((animal, i) => (
-              <option key={i} value={animal}>
-                {animal}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label htmlFor="breed-type">
-          Breed
-          <select
-            name="breedType"
-            id="breedType"
-            value={selectedBreed}
-            onChange={e => updateSelectedBreed(e.target.value)}
-            onBlur={e => updateSelectedBreed(e.target.value)}
-            disabled={!breeds.length}
-          >
-            <option> All </option>
-            {breeds.map(breed => (
-              <option key={breed} value={breed}>
-                {breed}
-              </option>
-            ))}
-          </select>
-        </label>
+        <AnimalDropdown />
+        <BreedDropdown />
         <button type="submit"> Submit </button>
       </form>
     </div>
